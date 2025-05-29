@@ -1,0 +1,9 @@
+abs(format_number( @grid_number ,2)) 
+|| '° ' 
+|| CASE 
+    WHEN  @grid_axis = 'x' 
+       THEN 
+         IF (@grid_number >= 0, 'E' , 'W')
+       ELSE
+           IF (@grid_number >= 0, 'N' , 'S')
+       END
