@@ -49,10 +49,15 @@ Make sure QGIS is installed. You will need to edit the installation path in the 
 
 ### Auto QGIS
 
-This script will automate the generation of maps of inundation scenarios using a list of input files.
+This script will automate the generation of maps of inundation scenarios using a list of input files. The `Defaults` directory contains all the necessary default files to run a scenario. 
 
-#### Configuration
+#### Configuration & Customization
 
 As a Jupyter Notebook, individual cells can be run, or the whole script can be run sequentially. The major changes can be made in the `qgis_config.ini` configuration file, which is read by the notebook. Make sure the conda environment is active before running the notebook.
 
-The main entries to change to generate new maps per location are the input csv (under `GENERAL_PATHS/input_csv`)
+The main entries to change to generate new maps per location are:
+- The input csv (under `GENERAL_PATHS/input_csv`). This input file requires a header line with the column names ("filename" and "legend entry") and the two columns with the associated entries. The first column needs to contain the full paths to the `.shp` inundation files of inundation, e.g. 
+`/Users/myname/Documents/Projects/PEERS/Philippines/LapuLapuCity/Inundation/Philippines_LapuLapu_Inundation_SLR_0p00m_FES2014_MHHW.shp`. This file should have a similarly named `_connectivity.shp` and `_disconnected.shp` file in the same directory as the main file. The second column should have the name of the desired legend entry in the map, e.g. "Inundation Risk baseline (= 0.00 m)\nabove MHHW" where `\n` is used to denote a new line. 
+- Individual bounding boxes can be added to the `qgis_config.ini` file to customize zooms. These bounding boxes must be listed under `BBOX`. 
+- Set the testing flag to `True` if you want to perform a test run for speed purposes. This will run the user-defined configuration on the first two entries only, so the user can check to see if the output is as desired. If satisfactory, set the flag to `False` and the software will rerun on all entries.
+- When running multiple scenarios it is prudent to restart the kernel every time a user wants to run a new scenario. 
